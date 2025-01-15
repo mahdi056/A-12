@@ -1,8 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/s logo.png';
+import { useContext } from "react";
+import { AuthContext } from "./Authprovider/Authprovider";
 
 
 const Header = () => {
+
+    const {user,logout} = useContext(AuthContext);
     return (
         <div>
 
@@ -44,7 +48,14 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn btn-outline btn-info">Login</button>
+                {
+                    user? (
+                        <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
+                    )
+                    :
+                    ( <Link to='/login'> <button className="btn btn-outline btn-info">Login</button> </Link>)
+
+                }
                 </div>
             </div>
 

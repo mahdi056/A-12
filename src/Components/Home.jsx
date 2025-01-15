@@ -7,7 +7,7 @@ const Home = () => {
         <div>
             {/* banner */}
 
-            <div className='flex justify-center'>
+            <div className='flex justify-center mt-12'>
 
                 <div className="carousel w-4/5">
                     <div id="slide1" className="carousel-item relative w-full">
@@ -79,12 +79,12 @@ const Home = () => {
                     </p>
                     <div className="grid md:grid-cols-2 gap-4">
                         <div className="p-4 bg-white shadow rounded">
-                            <h3 className="text-lg font-semibold text-gray-800">John Doe</h3>
+                            <h3 className="text-lg font-semibold text-gray-800">Karim Rahman</h3>
                             <p className="text-gray-600">Received a full scholarship to study at Harvard.</p>
                         </div>
                         <div className="p-4 bg-white shadow rounded">
-                            <h3 className="text-lg font-semibold text-gray-800">Jane Smith</h3>
-                            <p className="text-gray-600">Got financial aid to complete her engineering degree.</p>
+                            <h3 className="text-lg font-semibold text-gray-800">Md. Abdur Rahman</h3>
+                            <p className="text-gray-600">Got financial aid to complete his engineering degree.</p>
                         </div>
                     </div>
                 </section>
