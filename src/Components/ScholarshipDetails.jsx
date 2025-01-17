@@ -39,6 +39,7 @@ const ScholarshipDetails = () => {
         <p className="mt-2"><strong>Post Date:</strong> {scholarship.post_date}</p>
         <p className="mt-2"><strong>Service Charge:</strong> {scholarship.service_charge}</p>
         <p className="mt-2"><strong>Application Fees:</strong> {scholarship.application_fees}</p>
+        <p className="mt-2"><span className="font-bold">Rating: </span>{scholarship.rating}</p>
 
         <button className="mt-4 btn btn-outline btn-success w-full">
           Apply Scholarship
