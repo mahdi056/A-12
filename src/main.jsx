@@ -17,6 +17,7 @@ import Errorpage from './Components/Errorpage';
 import Login from './Components/Login';
 import Registration from './Components/Regisration';
 import Authprovider from './Components/Authprovider/Authprovider';
+import ScholarshipDetails from './Components/ScholarshipDetails';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/registration',
         element: <Registration></Registration>
+      },
+      {
+        path: '/scholarshipdetails/:id',
+        element: <ScholarshipDetails></ScholarshipDetails>,
       }
     ]
   },
