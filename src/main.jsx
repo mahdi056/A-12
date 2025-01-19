@@ -18,6 +18,8 @@ import Login from './Components/Login';
 import Registration from './Components/Regisration';
 import Authprovider from './Components/Authprovider/Authprovider';
 import ScholarshipDetails from './Components/ScholarshipDetails';
+import Dashboard from './Components/Dashboard';
+import Payment from './Components/Payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: '/scholarshipdetails/:id',
         element: <ScholarshipDetails></ScholarshipDetails>,
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>
+      },
+      {
+        path: '/payment',
+        element: <Payment></Payment>
       }
     ]
   },

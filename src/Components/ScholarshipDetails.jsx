@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ScholarshipDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
 
@@ -20,6 +21,10 @@ const ScholarshipDetails = () => {
   if (!scholarship) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }
+
+  const handleApply = () => {
+    navigate("/payment", { state: { price: scholarship.application_fees } });
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -41,7 +46,7 @@ const ScholarshipDetails = () => {
         <p className="mt-2"><strong>Application Fees:</strong> {scholarship.application_fees}</p>
         <p className="mt-2"><span className="font-bold">Rating: </span>{scholarship.rating}</p>
 
-        <button className="mt-4 btn btn-outline btn-success w-full">
+        <button onClick={handleApply} className="mt-4 btn btn-outline btn-success w-full">
           Apply Scholarship
         </button>
       </div>
