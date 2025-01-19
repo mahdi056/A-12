@@ -23,7 +23,14 @@ const ScholarshipDetails = () => {
   }
 
   const handleApply = () => {
-    navigate("/payment", { state: { price: scholarship.application_fees } });
+    navigate("/payment", { 
+      state: {
+        price: scholarship.application_fees, 
+        universityName: scholarship.university_name,
+        scholarshipCategory: scholarship.scholarship_category,
+        subCategory: scholarship.subject_category[0],
+      } 
+    });
   };
 
   return (
