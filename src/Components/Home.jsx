@@ -92,7 +92,7 @@ const Home = () => {
 
                                         {
                                             user ? (<Link to={`/scholarshipdetails/${scholarship._id}`}>
-                                                <button className="btn btn-outline btn-info">Details</button>
+                                                <button className="btn btn-outline btn-success">Details</button>
                                             </Link>)
                                             :
                                             (<Link to='/login'>

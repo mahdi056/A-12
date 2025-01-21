@@ -29,6 +29,8 @@ const ScholarshipDetails = () => {
         universityName: scholarship.university_name,
         scholarshipCategory: scholarship.scholarship_category,
         subCategory: scholarship.subject_category[0],
+        appFees: scholarship.application_fees,
+        serviceCrg: scholarship.service_charge
       } 
     });
   };

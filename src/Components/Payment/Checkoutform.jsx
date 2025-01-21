@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-const Checkoutform = ({price,universityName,scholarshipCategory,subCategory}) => {
+const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appFees,serviceCrg}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [error,setError] = useState('');
@@ -26,7 +26,10 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory}) =>
         studyGap: "",
         universityName,
         scholarshipCategory,
-        subCategory
+        subCategory,
+        appFees,
+        serviceCrg
+
       });
 
     useEffect(() => {
@@ -139,7 +142,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory}) =>
         <form onSubmit={handlePaymentSubmit} className="mx-auto mt-4 w-4/5">
           <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
           <button
-            className="btn btn-outline btn-info mt-4"
+            className="btn btn-outline btn-success mt-4"
             type="submit"
             disabled={!stripe || !clientSecret || isLoading}
           >

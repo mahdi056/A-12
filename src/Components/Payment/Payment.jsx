@@ -11,6 +11,8 @@ const Payment = () => {
     const universityName = location.state?.universityName || '';
     const scholarshipCategory = location.state?.scholarshipCategory || '';
     const subCategory = location.state?.subCategory || '';
+    const appFees = location.state?.appFees || '';
+    const serviceCrg = location.state?.serviceCrg || '';
     
     const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
     return (
@@ -22,6 +24,8 @@ const Payment = () => {
                 universityName={universityName}
                 scholarshipCategory={scholarshipCategory}
                 subCategory={subCategory}
+                appFees={appFees}
+                serviceCrg={serviceCrg}
                 ></Checkoutform>
 
             </Elements>

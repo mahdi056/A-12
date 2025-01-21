@@ -7,6 +7,7 @@ import { AuthContext } from "./Authprovider/Authprovider";
 const Header = () => {
 
     const { user, logout } = useContext(AuthContext);
+    // console.log(user);
     return (
         <div>
 
@@ -42,7 +43,7 @@ const Header = () => {
 
                         </ul>
                     </div>
-                    {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
+                    
                     <img className="w-16 h-12" src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -50,7 +51,7 @@ const Header = () => {
                         <li><NavLink to='/home'>Home</NavLink></li>
                         <li><NavLink to='/allscholarship'>All Scholarship</NavLink></li>
                         {
-                            user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+                            user ? (<li><NavLink to='/dashboard/myprofile'>Dashboard</NavLink></li>)
                                 :
                                 (<li><NavLink to='/login'>Dashboard</NavLink></li>)
                         }
@@ -62,7 +63,17 @@ const Header = () => {
                 <div className="navbar-end">
                     {
                         user ? (
-                            <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
+                            <div className="flex gap-x-2">
+                                <div>
+                                    <img className="rounded-full w-12 border-2 border-black" src={user.photourl} alt="" />
+                                    <p>{user.displayName}</p>
+                                </div>
+
+                                <div>
+                                <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
+                                </div>
+                            </div>
+                            
                         )
                             :
                             (<Link to='/login'> <button className="btn btn-outline btn-info">Login</button> </Link>)

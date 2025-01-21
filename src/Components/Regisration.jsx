@@ -61,9 +61,15 @@ const Registration = () => {
             displayName: name,
             photoURL: photourl
         })
-        
+
+           
+
+
         .then(() => {
             setUser({ ...user, displayName:name, photoURL: photourl });
+
+
+
             toast.success("Registration Successfull",{
                 position: 'top-center',
                 autoClose: 2000
