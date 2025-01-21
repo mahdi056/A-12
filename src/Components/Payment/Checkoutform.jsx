@@ -118,8 +118,8 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
     
         const applicationData = {
           ...formData,
-          userName: user.displayName, // Replace with authenticated user name
-          userEmail: user.email, // Replace with authenticated user email
+          userName: user.displayName, 
+          userEmail: user.email, 
         //   scholarshipId: "SCHOLARSHIP_ID", // Replace with scholarship ID from props/state
           currentDate: new Date().toISOString(),
         };
