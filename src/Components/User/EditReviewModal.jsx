@@ -50,6 +50,7 @@ const EditReviewModal = ({ review, onClose, onReviewUpdated }) => {
               value={formData.universityName}
               onChange={handleChange}
               required
+              readOnly
             />
           </div>
           <div className="mb-4">

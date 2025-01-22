@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Slider from "react-slick"; 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const ScholarshipDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
+  const [reviews,setReviews] = useState([]);
 
   // Fetch scholarship details
   useEffect(() => {
@@ -17,6 +21,12 @@ const ScholarshipDetails = () => {
         console.error("Error fetching scholarship details:", error);
       });
   }, [id]);
+
+
+  
+
+
+ 
 
   if (!scholarship) {
     return <p className="text-center text-gray-500">Loading...</p>;
@@ -35,6 +45,14 @@ const ScholarshipDetails = () => {
     });
   };
 
+
+ 
+
+
+
+
+  
+
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
@@ -45,6 +63,7 @@ const ScholarshipDetails = () => {
         <p className="text-gray-500 mt-1">Deadline: {scholarship.application_deadline}</p>
         <p className="mt-4"><strong>Subject Category:</strong> {scholarship.subject_category[0]}</p>
         <p className="mt-2">{scholarship.scholarship_description}</p>
+       
 
         {scholarship.stipend && (
           <p className="mt-2"><strong>Stipend:</strong> {scholarship.stipend}</p>
@@ -54,11 +73,17 @@ const ScholarshipDetails = () => {
         <p className="mt-2"><strong>Service Charge:</strong> {scholarship.service_charge}</p>
         <p className="mt-2"><strong>Application Fees:</strong> {scholarship.application_fees}</p>
         <p className="mt-2"><span className="font-bold">Rating: </span>{scholarship.rating}</p>
+        <p className="mt-2">Reviews: {scholarship.reviews}</p>
 
         <button onClick={handleApply} className="mt-4 btn btn-outline btn-success w-full">
           Apply Scholarship
         </button>
       </div>
+
+        
+
+
+
     </div>
   );
 };

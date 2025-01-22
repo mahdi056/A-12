@@ -63,6 +63,8 @@ const MyApplication = () => {
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-5">My Applied Scholarships</h1>
+      <div className='overflow-x-auto'>
+
       <table className="min-w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-100">
@@ -79,13 +81,13 @@ const MyApplication = () => {
         <tbody>
           {appliedScholarships.map((app) => (
             <tr key={app._id} className="text-center">
-              <td className="border border-gray-300 px-4 py-2">{app.universityName}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.address.village},{app.address.district},{app.address.country}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.subCategory}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.degree}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.appFees}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.serviceCrg}</td>
-              <td className="border border-gray-300 px-4 py-2">{app.status || 'Pending'}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.universityName}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.address.village},{app.address.district},{app.address.country}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.subCategory}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.degree}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.appFees}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.serviceCrg}</td>
+              <td className="border border-gray-300 px-2 py-1">{app.status || 'Pending'}</td>
               <td className="border border-gray-300">
 
                 <div className="grid grid-cols-2 gap-2">
@@ -112,12 +114,13 @@ const MyApplication = () => {
         </tbody>
       </table>
 
+      </div>
       <AddReviewModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         application={selectedApplication}
         onReviewAdded={handleReviewAdded}
-      />
+      ></AddReviewModal>
     </div>
   );
 };
