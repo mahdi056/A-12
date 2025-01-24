@@ -35,7 +35,7 @@ import Adminmngscho from './Components/Admin/Adminmngscho';
 import Adminmngappscho from './Components/Admin/Adminmngappscho';
 import Manageusers from './Components/Admin/Manageusers';
 import Managereviews from './Components/Admin/Managereviews';
-import EditScholarship from './Components/Moderator/EditScholarship';
+
 
 const router = createBrowserRouter([
   {
@@ -119,10 +119,7 @@ const router = createBrowserRouter([
         path: 'addscholarship',
         element: <Addscholarship></Addscholarship>
       },
-      {
-        path: 'editscholarship/:id',
-        element: <EditScholarship></EditScholarship>
-      },
+     
       {
         path: 'adminprofile',
         element: <Adminprofile></Adminprofile>

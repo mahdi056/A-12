@@ -91,7 +91,7 @@ const MyApplication = () => {
               <td className="border border-gray-300">
 
                 <div className="grid grid-cols-2 gap-2">
-                  <button className="btn btn-outline btn-success">Details</button>
+                  
                   <Link to={`/dashboard/edit-application/${app._id}`}>
                     <button className="btn btn-success text-white rounded">Edit</button>
                   </Link>

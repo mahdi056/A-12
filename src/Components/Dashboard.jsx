@@ -6,7 +6,7 @@ import axios from 'axios';
 const Dashboard = () => {
   const { user } = useContext(AuthContext); 
   const [loading, setLoading] = useState(false)
- const ismod = false;
+ const ismod = true;
  const isadmin = false;
  
 
