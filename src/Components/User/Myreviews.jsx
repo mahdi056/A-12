@@ -15,7 +15,7 @@ const MyReviews = () => {
   useEffect(() => {
     if (userEmail) {
       axios
-        .get(`http://localhost:5000/reviews?email=${userEmail}`)
+        .get(`http://localhost:5000/reviews-by-email?email=${userEmail}`)
         .then((res) => setReviews(res.data))
         .catch((err) => console.error(err));
     }

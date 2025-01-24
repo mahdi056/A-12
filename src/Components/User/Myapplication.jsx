@@ -120,6 +120,7 @@ const MyApplication = () => {
         onClose={() => setIsModalOpen(false)}
         application={selectedApplication}
         onReviewAdded={handleReviewAdded}
+        
       ></AddReviewModal>
     </div>
   );

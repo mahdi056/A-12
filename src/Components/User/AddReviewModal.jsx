@@ -12,7 +12,7 @@ const AddReviewModal = ({ isOpen, onClose, application, onReviewAdded }) => {
 
   if (!isOpen || !application) return null; 
 
-  const { universityName, scholarshipCategory, _id:universityId } = application;
+  const { universityName, scholarshipCategory, _id:universityId, subCategory } = application;
 //   console.log(application._id);
  
 
@@ -29,6 +29,7 @@ const AddReviewModal = ({ isOpen, onClose, application, onReviewAdded }) => {
       universityName,
       scholarshipCategory,
       universityId,
+      subCategory,
       userName: user.displayName, 
       userEmail: user.email, 
     };
