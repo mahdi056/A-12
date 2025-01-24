@@ -44,7 +44,7 @@ const Registration = () => {
       return;
     }
 
-    setPasswordError(""); // Clear any previous error
+    setPasswordError(""); 
 
     try {
       // Create new user
@@ -59,7 +59,7 @@ const Registration = () => {
 
       setUser({ ...user, displayName: name, photoURL: photourl });
 
-      // Save user info to the database
+   
       const userInfo = { name, email, photo: photourl };
       const res = await axios.post("http://localhost:5000/users", userInfo);
       if (res.data.insertedId) {
@@ -71,7 +71,7 @@ const Registration = () => {
         navigate("/home");
       }
        else if (res.data.message === "User already exists") {
-        toast.error("User already exists in the database.", {
+        toast.error("User already exists.", {
           position: "top-center",
         });
       }

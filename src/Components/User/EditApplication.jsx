@@ -17,7 +17,7 @@ const EditApplication = () => {
 
     // Fetch application data
     useEffect(() => {
-        axios.get(`http://localhost:5000/apply-scholarship/${id}`)
+        axios.get(`http://localhost:5000/apply-scholarship-by-email/${id}`)
             .then((res) => setFormData(res.data))
             .catch((err) => console.error(err));
     }, [id]);
@@ -135,6 +135,7 @@ const EditApplication = () => {
                         onChange={handleChange}
                         className="input input-bordered w-full"
                         required
+                        
                     />
                 </div>
                 <div>
@@ -146,6 +147,7 @@ const EditApplication = () => {
                         onChange={handleChange}
                         className="input input-bordered w-full"
                         required
+                        
                     />
                 </div>
                 <button type="submit" className="btn btn-success">

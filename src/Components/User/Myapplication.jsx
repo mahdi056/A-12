@@ -15,7 +15,7 @@ const MyApplication = () => {
   // Fetch applied scholarships
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/apply-scholarship?email=${userEmail}`)
+      .get(`http://localhost:5000/apply-scholarship-by-email?email=${userEmail}`)
       .then((res) => 
         
         setAppliedScholarships(res.data)

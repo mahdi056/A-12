@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from './Authprovider/Authprovider';
+import axios from 'axios';
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); 
+  const [loading, setLoading] = useState(false)
+ const ismod = true;
+ const isadmin = false;
+ 
 
-  const isadmin = true;
-  const ismod = false;
+ 
 
+ 
+ 
 
   return (
     <div className="flex h-screen">
@@ -16,7 +22,7 @@ const Dashboard = () => {
         <h2 className="text-lg md:text-2xl font-bold mb-6 self-center">Dashboard</h2>
 
         {
-          user && !isadmin && !ismod && (
+          user && !ismod && !isadmin && (
             <>
 
               <NavLink
@@ -104,7 +110,7 @@ const Dashboard = () => {
                   }`
                 }
               >
-                All Applie Scholarships
+                All Applied Scholarships
               </NavLink>
 
               <NavLink

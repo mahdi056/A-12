@@ -18,6 +18,7 @@ const AllScholarships = () => {
       });
   }, []);
 
+
   // Filter scholarships by university name
   const filteredScholarships = scholarships.filter((scholarship) =>
     scholarship.university_name.toLowerCase().includes(searchQuery.toLowerCase())

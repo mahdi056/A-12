@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import Slider from "react-slick"; 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -40,7 +39,8 @@ const ScholarshipDetails = () => {
         scholarshipCategory: scholarship.scholarship_category,
         subCategory: scholarship.subject_category[0],
         appFees: scholarship.application_fees,
-        serviceCrg: scholarship.service_charge
+        serviceCrg: scholarship.service_charge,
+        
       } 
     });
   };
@@ -71,7 +71,7 @@ const ScholarshipDetails = () => {
 
         <p className="mt-2"><strong>Post Date:</strong> {scholarship.post_date}</p>
         <p className="mt-2"><strong>Service Charge:</strong> {scholarship.service_charge}</p>
-        <p className="mt-2"><strong>Application Fees:</strong> {scholarship.application_fees}</p>
+        <p className="mt-2"><strong>Application Fees:</strong> {scholarship.application_fees} $</p>
         <p className="mt-2"><span className="font-bold">Rating: </span>{scholarship.rating}</p>
         <p className="mt-2">Reviews: {scholarship.reviews}</p>
 
