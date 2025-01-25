@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt,FaInfoCircle, FaInfo } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const ManageScholarships = () => {
   const [scholarships, setScholarships] = useState([]);
-  const [editingScholarship, setEditingScholarship] = useState(null); // Scholarship being edited
-  const [modalOpen, setModalOpen] = useState(false); // Modal visibility state
+  const [editingScholarship, setEditingScholarship] = useState(null); 
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false); 
+  const [selectedScholarship, setSelectedScholarship] = useState(null); 
+
 
   useEffect(() => {
     // Fetch scholarships from the server
@@ -22,8 +25,8 @@ const ManageScholarships = () => {
 
   // Open modal and set the scholarship being edited
   const handleEdit = (scholarship) => {
-    setEditingScholarship(scholarship); // Set the scholarship to edit
-    setModalOpen(true); // Open the modal
+    setEditingScholarship(scholarship); 
+    setModalOpen(true); 
   };
 
   // Handle form submission to update scholarship
@@ -54,6 +57,13 @@ const ManageScholarships = () => {
     setEditingScholarship({ ...editingScholarship, [name]: value });
   };
 
+
+   // Open details modal
+   const handleDetails = (scholarship) => {
+    setSelectedScholarship(scholarship); // Set the selected scholarship for details
+    setDetailsModalOpen(true); // Open details modal
+  };
+
   const handleDelete = (id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -81,6 +91,9 @@ const ManageScholarships = () => {
     });
   };
 
+
+ 
+
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Manage Scholarships</h2>
@@ -104,17 +117,21 @@ const ManageScholarships = () => {
               <td className="border px-4 py-2">{scholarship.degree}</td>
               <td className="border px-4 py-2">{scholarship.appFees}</td>
               <td className="border px-4 py-2 flex gap-2 justify-center">
+
+                <button
+                 onClick={() => handleDetails(scholarship)}
+                ><FaInfoCircle></FaInfoCircle></button>
                 <button
                   className="text-green-500 hover:text-green-700"
                   onClick={() => handleEdit(scholarship)}
                 >
-                  <FaEdit />
+                  <FaEdit></FaEdit>
                 </button>
                 <button
                   className="text-red-500 hover:text-red-700"
                   onClick={() => handleDelete(scholarship._id)}
                 >
-                  <FaTrashAlt />
+                  <FaTrashAlt></FaTrashAlt>
                 </button>
               </td>
             </tr>
@@ -122,6 +139,47 @@ const ManageScholarships = () => {
         </tbody>
       </table>
 
+
+        {/* Details Modal */}
+        {detailsModalOpen && selectedScholarship && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-md w-3/4">
+            <h3 className="text-lg font-bold mb-4">Scholarship Details</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p><strong>Photo:</strong> <img src={selectedScholarship.photo} alt="Scholarship" className="w-32 h-32" /></p>
+                <p><strong>Address:</strong> {selectedScholarship.address.country}</p>
+                <p><strong>Gender:</strong> {selectedScholarship.gender}</p>
+                <p><strong>Degree:</strong> {selectedScholarship.degree}</p>
+                <p><strong>SSC Result:</strong> {selectedScholarship.sscResult}</p>
+                <p><strong>HSC Result:</strong> {selectedScholarship.hscResult}</p>
+                <p><strong>Study Gap:</strong> {selectedScholarship.studyGap}</p>
+              </div>
+              <div>
+                <p><strong>University Name:</strong> {selectedScholarship.universityName}</p>
+                <p><strong>Scholarship Category:</strong> {selectedScholarship.scholarshipCategory}</p>
+                <p><strong>Subject Category:</strong> {selectedScholarship.subCategory}</p>
+                <p><strong>Application Fees:</strong> {selectedScholarship.appFees}</p>
+                <p><strong>Service Charge:</strong> {selectedScholarship.serviceCrg}</p>
+                <p><strong>User Name:</strong> {selectedScholarship.userName}</p>
+                <p><strong>User Email:</strong> {selectedScholarship.userEmail}</p>
+                <p><strong>Application Date:</strong> {selectedScholarship.currentDate}</p>
+              </div>
+            </div>
+            <div className="flex justify-end mt-4">
+              <button
+                className="px-4 py-2 bg-gray-300 rounded"
+                onClick={() => setDetailsModalOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+     
       {/* Edit Modal */}
       {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

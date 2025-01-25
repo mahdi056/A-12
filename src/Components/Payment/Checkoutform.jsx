@@ -120,15 +120,18 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
           ...formData,
           userName: user.displayName, 
           userEmail: user.email, 
-        //   scholarshipId: "SCHOLARSHIP_ID", 
           currentDate: new Date().toISOString(),
         };
+
+        
     
         axios
           .post("http://localhost:5000/apply-scholarship", applicationData)
           .then(() => toast.success("Application submitted successfully!"))
           .catch((err) => toast.error("Application submission failed."));
       };
+
+      
 
 
     return (

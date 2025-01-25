@@ -10,6 +10,8 @@ const MyApplication = () => {
   const [appliedScholarships, setAppliedScholarships] = useState([]);
   const [selectedApplication, setSelectedApplication] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [feedback, setFeedback] = useState([]);
   const userEmail = user.email;
 
   // Fetch applied scholarships
@@ -23,6 +25,15 @@ const MyApplication = () => {
 
       .catch((err) => console.error(err));
   }, [userEmail]);
+
+  // Feedback 
+  useEffect(()=> {
+    axios.get('http://localhost:5000/feedback')
+    .then(res => setFeedback(res.data))
+    .catch(error => console.error(error))
+  },[]);
+
+
 
  
 
@@ -60,6 +71,18 @@ const MyApplication = () => {
     Swal.fire('Success!', 'Your review has been added.', 'success');
   };
 
+   // Open the details modal
+   const handleDetails = (application) => {
+    setSelectedApplication(application);
+    setIsDetailsModalOpen(true);
+  };
+
+  // Close the details modal
+  const closeDetailsModal = () => {
+    setSelectedApplication(null);
+    setIsDetailsModalOpen(false);
+  };
+
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-5">My Applied Scholarships</h1>
@@ -91,6 +114,13 @@ const MyApplication = () => {
               <td className="border border-gray-300">
 
                 <div className="grid grid-cols-2 gap-2">
+
+                <button
+                      className="btn btn-outline btn-success"
+                      onClick={() => handleDetails(app)}
+                    >
+                      Details
+                    </button>
                   
                   <Link to={`/dashboard/edit-application/${app._id}`}>
                     <button className="btn btn-success text-white rounded">Edit</button>
@@ -113,6 +143,60 @@ const MyApplication = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Feedback Section */}
+      <div className="mt-4">
+        <h3 className="text-lg font-semibold mb-2">Feedback</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {feedback.map((feedback) => (
+          <div
+            key={feedback._id}
+            className="bg-white shadow-lg rounded-lg p-5 border border-gray-200"
+          >
+            
+            <p className="text-gray-700">
+              <strong>Feedback:</strong> {feedback.feedback}
+            </p>
+           
+          </div>
+        ))}
+      </div>
+        
+      </div>
+
+       {/* Details Modal */}
+       {isDetailsModalOpen && selectedApplication && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-lg">
+            <h2 className="text-2xl font-bold mb-4">Application Details</h2>
+            <p><strong>Phone:</strong> {selectedApplication.phone}</p>
+            <p><strong>Photo:</strong> <img src={selectedApplication.photo} alt="" className="w-20 h-20 rounded-full" /></p>
+            <p><strong>Address:</strong> {selectedApplication.address.village}, {selectedApplication.address.district}, {selectedApplication.address.country}</p>
+            <p><strong>Gender:</strong> {selectedApplication.gender}</p>
+            <p><strong>Degree:</strong> {selectedApplication.degree}</p>
+            <p><strong>SSC Result:</strong> {selectedApplication.sscResult}</p>
+            <p><strong>HSC Result:</strong> {selectedApplication.hscResult}</p>
+            <p><strong>Study Gap:</strong> {selectedApplication.studyGap}</p>
+            <p><strong>University Name:</strong> {selectedApplication.universityName}</p>
+            <p><strong>Scholarship Category:</strong> {selectedApplication.scholarshipCategory}</p>
+            <p><strong>Sub Category:</strong> {selectedApplication.subCategory}</p>
+            <p><strong>Application Fees:</strong> {selectedApplication.appFees}</p>
+            <p><strong>Service Charge:</strong> {selectedApplication.serviceCrg}</p>
+            <p><strong>User Name:</strong> {selectedApplication.userName}</p>
+            <p><strong>User Email:</strong> {selectedApplication.userEmail}</p>
+            <p><strong>Current Date:</strong> {selectedApplication.currentDate}</p>
+            <button
+              className="btn btn-outline btn-error mt-4"
+              onClick={closeDetailsModal}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+
+      
 
       </div>
       <AddReviewModal
