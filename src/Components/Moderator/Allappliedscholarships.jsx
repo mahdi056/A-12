@@ -8,7 +8,7 @@ const Allappliedscholarships = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false); 
   const [feedback, setFeedback] = useState(""); 
-
+  const [sortFilterOption, setSortFilterOption] = useState("");
   // Fetch all applied scholarships
   useEffect(() => {
     axios
@@ -69,9 +69,38 @@ const Allappliedscholarships = () => {
   };
 
 
+  // Handle sort/filter change
+  const handleSortFilterChange = (option) => {
+    setSortFilterOption(option);
+
+    let sortedFilteredList = [...scholarships];
+
+    if (option === "appliedDate") {
+      sortedFilteredList.sort(
+        (a, b) => new Date(a.appliedDate) - new Date(b.appliedDate)
+      );
+    } else if (option === "deadline") {
+      sortedFilteredList.sort(
+        (a, b) => new Date(a.deadline) - new Date(b.deadline)
+      );
+    }
+
+    setScholarships(sortedFilteredList);
+  };
+
+
   return (
     <div className="p-5">
       <h1 className="text-2xl font-bold mb-5">All Applied Scholarships</h1>
+      <select
+          value={sortFilterOption}
+          onChange={(e) => handleSortFilterChange(e.target.value)}
+          className="border border-gray-300 p-2 rounded"
+        >
+          <option value="">Sort/Filter By</option>
+          <option value="appliedDate">Applied Date</option>
+          <option value="deadline">Scholarship Deadline</option>
+        </select>
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
@@ -135,19 +164,19 @@ const Allappliedscholarships = () => {
               <strong>Scholarship Category:</strong> {selectedScholarship.scholarshipCategory}
             </p>
             <p>
-              <strong>Scholarship Category:</strong> {selectedScholarship.subCategory}
+              <strong>Subject Category:</strong> {selectedScholarship.subCategory}
             </p>
             <p>
-              <strong>Scholarship Category:</strong> {selectedScholarship.appFees}
+              <strong>Appication Fees:</strong> {selectedScholarship.appFees}
             </p>
             <p>
-              <strong>Scholarship Category:</strong> {selectedScholarship.serviceCrg}
+              <strong>Service Charge:</strong> {selectedScholarship.serviceCrg}
             </p>
             <p>
-              <strong>Scholarship Category:</strong> {selectedScholarship.gender}
+              <strong>Gender:</strong> {selectedScholarship.gender}
             </p>
             <p>
-              <strong>Scholarship Category:</strong> {selectedScholarship.degree}
+              <strong>Degree:</strong> {selectedScholarship.degree}
             </p>
 
           

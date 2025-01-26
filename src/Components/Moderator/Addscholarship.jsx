@@ -6,8 +6,10 @@ const AddScholarship = () => {
   const [formData, setFormData] = useState({
     scholarship_name: '',
     university_name: '',
-    university_location: '',
-    university_city: '',
+    university_location: {
+      country: '',
+      city: '',
+    },
     university_rank: '',
     subject_category: 'Agriculture',  
     scholarship_category: 'Full fund', 
@@ -23,10 +25,22 @@ const AddScholarship = () => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // Update nested university_location fields
+    if (name === 'university_country' || name === 'university_city') {
+      setFormData((prevData) => ({
+        ...prevData,
+        university_location: {
+          ...prevData.university_location,
+          [name === 'university_country' ? 'country' : 'city']: value,
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   // Handle form submission
@@ -37,12 +51,13 @@ const AddScholarship = () => {
       const response = await axios.post('http://localhost:5000/all-scholarship', formData);
       if (response.status === 201) {
         Swal.fire('Scholarship added successfully!');
-        
         setFormData({
           scholarship_name: '',
           university_name: '',
-          university_location: '',
-          university_city: '',
+          university_location: {
+            country: '',
+            city: '',
+          },
           university_rank: '',
           subject_category: 'Agriculture',
           scholarship_category: 'Full fund',
@@ -90,12 +105,12 @@ const AddScholarship = () => {
         </div>
 
         <div>
-          <label htmlFor="university_location" className="block">University Country</label>
+          <label htmlFor="university_country" className="block">University Country</label>
           <input
             type="text"
-            id="university_location"
-            name="university_location"
-            value={formData.university_location}
+            id="university_country"
+            name="university_country"
+            value={formData.university_location.country}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
           />
@@ -107,7 +122,7 @@ const AddScholarship = () => {
             type="text"
             id="university_city"
             name="university_city"
-            value={formData.university_city}
+            value={formData.university_location.city}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
           />

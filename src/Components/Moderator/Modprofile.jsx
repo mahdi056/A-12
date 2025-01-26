@@ -3,11 +3,11 @@ import { AuthContext } from "../Authprovider/Authprovider";
 
 
 const Modprofile = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     return (
         <div>
 
-<div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+            <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
                 <h2 className="text-2xl font-bold text-center mb-4">My Profile</h2>
 
                 <div className="flex flex-col items-center">
@@ -26,12 +26,12 @@ const Modprofile = () => {
 
                     <p className="text-red-700 text-2xl">  Moderator Role pore Add korte hobe</p>
 
-                
+
                 </div>
             </div>
 
 
-            
+
         </div>
     );
 };

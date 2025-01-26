@@ -3,14 +3,29 @@ import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
+    const [filterRole, setFilterRole] = useState('all'); // State for selected filter
 
-   
+    // Fetch all users on component mount
     useEffect(() => {
         fetch('http://localhost:5000/users') 
             .then(res => res.json())
-            .then(data => setUsers(data))
+            .then(data => {
+                setUsers(data);
+                setFilteredUsers(data); // Initialize filtered users
+            })
             .catch(err => console.error(err));
     }, []);
+
+    // Filter users based on selected role
+    const handleFilterChange = (role) => {
+        setFilterRole(role);
+        if (role === 'all') {
+            setFilteredUsers(users); // Show all users when "All" is selected
+        } else {
+            setFilteredUsers(users.filter(user => user.role === role));
+        }
+    };
 
     // Update user role
     const handleRoleChange = (id, newRole) => {
@@ -24,55 +39,80 @@ const ManageUsers = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.message === 'User role updated successfully') {
-                    setUsers(users.map(user => 
+                    const updatedUsers = users.map(user => 
                         user._id === id ? { ...user, role: newRole } : user
-                    ));
+                    );
+                    setUsers(updatedUsers);
+                    setFilteredUsers(
+                        filterRole === 'all'
+                            ? updatedUsers
+                            : updatedUsers.filter(user => user.role === filterRole)
+                    ); // Update filtered users based on the current filter
                     Swal.fire({
-                       
                         text: "User Role Updated Successfully",
                         icon: "success"
-                      });
+                    });
                 }
             })
             .catch(err => console.error(err));
     };
 
     // Delete user
-  
-const handleDelete = id => {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then(result => {
-        if (result.isConfirmed) {
-            fetch(`http://localhost:5000/users/${id}`, {
-                method: 'DELETE',
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.message === 'User deleted successfully') {
-                        setUsers(users.filter(user => user._id !== id));
-                        Swal.fire('Deleted!', 'User has been deleted.', 'success');
-                    } else {
-                        Swal.fire('Error', 'Could not delete the user', 'error');
-                    }
+    const handleDelete = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(result => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/users/${id}`, {
+                    method: 'DELETE',
                 })
-                .catch(err => {
-                    console.error(err);
-                    Swal.fire('Error', 'Something went wrong', 'error');
-                });
-        }
-    });
-};
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.message === 'User deleted successfully') {
+                            const updatedUsers = users.filter(user => user._id !== id);
+                            setUsers(updatedUsers);
+                            setFilteredUsers(
+                                filterRole === 'all'
+                                    ? updatedUsers
+                                    : updatedUsers.filter(user => user.role === filterRole)
+                            ); // Update filtered users based on the current filter
+                            Swal.fire('Deleted!', 'User has been deleted.', 'success');
+                        } else {
+                            Swal.fire('Error', 'Could not delete the user', 'error');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire('Error', 'Something went wrong', 'error');
+                    });
+            }
+        });
+    };
 
     return (
         <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold">Manage Users</h2>
+                
+                {/* Role Filter Dropdown */}
+                <select
+                    value={filterRole}
+                    onChange={e => handleFilterChange(e.target.value)}
+                    className="border rounded px-2 py-1"
+                >
+                    <option value="all">All Roles</option>
+                    <option value="user">User</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
             <table className="table-auto border-collapse border border-gray-200 w-full">
                 <thead>
                     <tr>
@@ -83,7 +123,7 @@ const handleDelete = id => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
+                    {filteredUsers.map(user => ( // Use filteredUsers to render rows
                         <tr key={user._id}>
                             <td className="border border-gray-300 px-4 py-2">{user.name || 'N/A'}</td>
                             <td className="border border-gray-300 px-4 py-2">{user.email}</td>
