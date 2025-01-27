@@ -35,6 +35,8 @@ import Adminmngscho from './Components/Admin/Adminmngscho';
 import Adminmngappscho from './Components/Admin/Adminmngappscho';
 import Manageusers from './Components/Admin/Manageusers';
 import Managereviews from './Components/Admin/Managereviews';
+import Chart from './Components/Admin/Chart';
+
 
 
 const router = createBrowserRouter([
@@ -55,6 +57,7 @@ const router = createBrowserRouter([
         path: '/allscholarship',
         element: <AllScholarships></AllScholarships>
       },
+      
       {
         path: '/login',
         element: <Login></Login>
@@ -144,6 +147,10 @@ const router = createBrowserRouter([
         path: 'managereviews',
         element: <Managereviews></Managereviews>
       },
+      {
+        path: 'chart',
+        element: <Chart></Chart>
+      }
       
     ]
   },

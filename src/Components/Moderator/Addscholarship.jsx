@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 const AddScholarship = () => {
   const [formData, setFormData] = useState({
     scholarship_name: '',
+    university_logo: '', 
     university_name: '',
     university_location: {
       country: '',
@@ -21,6 +22,9 @@ const AddScholarship = () => {
     scholarship_post_date: new Date().toISOString().split('T')[0],
     posted_user_email: '',
   });
+
+
+  const [imageUploading, setImageUploading] = useState(false); 
 
   // Handle input changes
   const handleChange = (e) => {
@@ -43,6 +47,34 @@ const AddScholarship = () => {
     }
   };
 
+
+    // Handle image upload
+    const handleImageUpload = async (e) => {
+      const file = e.target.files[0]; 
+      if (!file) return;
+  
+      setImageUploading(true); 
+  
+      const formData = new FormData();
+      formData.append('image', file);
+  
+      try {
+        const imgbbApiKey = import.meta.env.VITE_IMAGE_HOSTING_KEY; 
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
+        const imageUrl = response.data.data.display_url; 
+        setFormData((prevData) => ({
+          ...prevData,
+          university_logo: imageUrl, 
+        }));
+        
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        
+      } finally {
+        setImageUploading(false); 
+      }
+    };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,9 +82,11 @@ const AddScholarship = () => {
     try {
       const response = await axios.post('http://localhost:5000/all-scholarship', formData);
       if (response.status === 201) {
+        console.log(formData);
         Swal.fire('Scholarship added successfully!');
         setFormData({
           scholarship_name: '',
+          university_logo: '', 
           university_name: '',
           university_location: {
             country: '',
@@ -102,6 +136,29 @@ const AddScholarship = () => {
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
           />
+        </div>
+
+        <div>
+          <label htmlFor="university_logo" className="block">University Logo</label>
+          <input
+            type="file"
+            id="university_logo"
+            name="university_logo"
+            onChange={handleImageUpload} // Handle image upload
+            className="w-full p-2 border border-gray-300 rounded"
+            accept="image/*" // Accept only image files
+          />
+          {imageUploading && <p className="text-sm text-blue-500 mt-2">Uploading image...</p>}
+          {formData.university_logo && (
+            <div className="mt-2">
+             
+              <img
+                src={formData.university_logo}
+                alt="University Logo"
+                className="w-32 h-32 object-contain border rounded"
+              />
+            </div>
+          )}
         </div>
 
         <div>

@@ -51,10 +51,12 @@ const Header = () => {
                         <li><NavLink to='/home'>Home</NavLink></li>
                         <li><NavLink to='/allscholarship'>All Scholarship</NavLink></li>
                         {
-                            user ? (<li><NavLink to='/dashboard/myprofile'>Dashboard</NavLink></li>)
+                            user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
                                 :
                                 (<li><NavLink to='/login'>Dashboard</NavLink></li>)
                         }
+
+                        
 
                         
 

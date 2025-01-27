@@ -1,18 +1,19 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
-    const [filterRole, setFilterRole] = useState('all'); // State for selected filter
+    const [filteredUsers, setFilteredUsers] = useState([]); 
+    const [filterRole, setFilterRole] = useState('all'); 
 
     // Fetch all users on component mount
     useEffect(() => {
-        fetch('http://localhost:5000/users') 
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data);
-                setFilteredUsers(data); // Initialize filtered users
+         axios.get('http://localhost:5000/users') 
+            
+            .then(res => {
+                setUsers(res.data);
+                setFilteredUsers(res.data); 
             })
             .catch(err => console.error(err));
     }, []);
@@ -21,7 +22,7 @@ const ManageUsers = () => {
     const handleFilterChange = (role) => {
         setFilterRole(role);
         if (role === 'all') {
-            setFilteredUsers(users); // Show all users when "All" is selected
+            setFilteredUsers(users); 
         } else {
             setFilteredUsers(users.filter(user => user.role === role));
         }
@@ -123,7 +124,7 @@ const ManageUsers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredUsers.map(user => ( // Use filteredUsers to render rows
+                    {filteredUsers.map(user => ( 
                         <tr key={user._id}>
                             <td className="border border-gray-300 px-4 py-2">{user.name || 'N/A'}</td>
                             <td className="border border-gray-300 px-4 py-2">{user.email}</td>

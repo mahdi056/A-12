@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "./Authprovider/Authprovider";
 import axios from "axios";
+
 
 const Registration = () => {
   const { createNewUser, setUser, updateUserProfile, signinWithgoogle } = useContext(AuthContext);
@@ -35,10 +36,10 @@ const Registration = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/;
     if (!passwordRegex.test(password)) {
       setPasswordError(
-        "Password must include at least one uppercase letter, one lowercase letter, and be at least 6 characters long."
+        "Password must include at least one uppercase letter, a special character, and be at least 6 characters long."
       );
       toast.error("Invalid password format.", { position: "top-center" });
       return;
@@ -85,6 +86,7 @@ const Registration = () => {
 
   return (
     <div className="mt-8">
+     <ToastContainer></ToastContainer>
       <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
         <h2 className="text-2xl font-bold text-center">Register Now!!!</h2>
         <form onSubmit={handleForm} className="card-body">

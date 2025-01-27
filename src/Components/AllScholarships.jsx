@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "./Authprovider/Authprovider";
 
 const AllScholarships = () => {
+
+  
+
   const {user} = useContext(AuthContext);
   const [scholarships, setScholarships] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

@@ -5,11 +5,30 @@ import axios from 'axios';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext); 
-  const [loading, setLoading] = useState(false)
- const ismod = true;
- const isadmin = false;
- 
+  const [currentUserRole, setCurrentUserRole] = useState('');
 
+  useEffect(() => {
+    // Fetch all users from your backend
+    axios
+      .get('http://localhost:5000/users')
+      .then((res) => {
+        
+        const loggedInUser = res.data.find((u) => u.email === user.email);
+        
+    
+        if (loggedInUser) {
+          setCurrentUserRole(loggedInUser.role);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching users:', error);
+      });
+  }, [user.email]); 
+  
+  
+
+ 
+console.log(currentUserRole);
  
 
  
@@ -20,9 +39,10 @@ const Dashboard = () => {
       {/* Sidebar */}
       <div className="w-1/5 bg-green-600 text-white flex flex-col items-start py-8 px-4 shadow-lg">
         <h2 className="text-lg md:text-2xl font-bold mb-6 self-center">Dashboard</h2>
+       
 
         {
-          user && !ismod && !isadmin && (
+          user && currentUserRole !== 'moderator' && currentUserRole !== 'admin' && (
             <>
 
               <NavLink
@@ -66,7 +86,7 @@ const Dashboard = () => {
 
         }
         {
-          user && ismod && (
+          user && currentUserRole === 'moderator' && (
             <>
 
               <NavLink
@@ -128,7 +148,7 @@ const Dashboard = () => {
         }
 
         {
-          user && isadmin && (
+          user && currentUserRole === 'admin' && (
             <>
 
               <NavLink
@@ -193,6 +213,17 @@ const Dashboard = () => {
                 }
               >
                 Manage Reviews 
+              </NavLink>
+
+
+              <NavLink
+                to="/dashboard/chart"
+                className={({ isActive }) =>
+                  `mb-4 px-4 py-2 rounded-lg hover:bg-black transition-all w-full text-left ${isActive ? "bg-black font-bold" : ""
+                  }`
+                }
+              >
+                Chart
               </NavLink>
 
 

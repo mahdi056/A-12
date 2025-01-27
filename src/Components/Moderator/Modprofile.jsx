@@ -1,9 +1,29 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Authprovider/Authprovider";
+import axios from "axios";
 
 
 const Modprofile = () => {
     const { user } = useContext(AuthContext);
+    const [currentUserRole, setCurrentUserRole] = useState('');
+    
+  useEffect(() => {
+    // Fetch all users from your backend
+    axios.get('http://localhost:5000/users')
+      .then((res) => {
+        
+        const loggedInUser = res.data.find((u) => u.email === user.email);
+        
+    
+        if (loggedInUser) {
+          setCurrentUserRole(loggedInUser.role);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching users:', error);
+      });
+  }, [user.email]); 
+  
     return (
         <div>
 
@@ -24,7 +44,7 @@ const Modprofile = () => {
                     {/* User Email */}
                     <p className="text-gray-600">{user?.email}</p>
 
-                    <p className="text-red-700 text-2xl">  Moderator Role pore Add korte hobe</p>
+                    <p className="text-red-700 text-2xl">{currentUserRole}</p>
 
 
                 </div>
