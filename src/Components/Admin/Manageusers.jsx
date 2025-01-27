@@ -9,7 +9,7 @@ const ManageUsers = () => {
 
     // Fetch all users on component mount
     useEffect(() => {
-         axios.get('http://localhost:5000/users') 
+         axios.get('https://a-12-server-side-gold.vercel.app/users') 
             
             .then(res => {
                 setUsers(res.data);
@@ -30,7 +30,7 @@ const ManageUsers = () => {
 
     // Update user role
     const handleRoleChange = (id, newRole) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://a-12-server-side-gold.vercel.app/users/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/${id}`, {
+                fetch(`https://a-12-server-side-gold.vercel.app/users/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

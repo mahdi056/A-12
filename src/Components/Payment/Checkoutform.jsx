@@ -34,7 +34,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
 
     useEffect(() => {
         axios
-          .post("http://localhost:5000/create-payment-intent", { price })
+          .post("https://a-12-server-side-gold.vercel.app/create-payment-intent", { price })
           .then((res) => setClientSecret(res.data.clientSecret))
           .catch((err) => console.error(err));
       }, [price]);
@@ -58,11 +58,11 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
         });
 
         if (error){
-            console.log("Payment Error",error);
+            // console.log("Payment Error",error);
             setError(error.message);
         }
         else{
-            console.log("Payment Method",paymentMethod);
+            // console.log("Payment Method",paymentMethod);
             setError('');
         }
 
@@ -82,7 +82,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
             console.error("Payment Error:", error);
             setError(error.message);
           } else if (paymentIntent?.status === "succeeded") {
-            console.log("Payment Successful:", paymentIntent);
+            // console.log("Payment Successful:", paymentIntent);
             toast.success("Payment Successful!",{
                 position: 'top-center',
                 autoClose: 2000,
@@ -126,7 +126,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
         
     
         axios
-          .post("http://localhost:5000/apply-scholarship", applicationData)
+          .post("https://a-12-server-side-gold.vercel.app/apply-scholarship", applicationData)
           .then(() => toast.success("Application submitted successfully!"))
           .catch((err) => toast.error("Application submission failed."));
       };

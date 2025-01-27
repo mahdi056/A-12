@@ -16,7 +16,7 @@ const Adminmngscho = () => {
     useEffect(() => {
       // Fetch scholarships from the server
       axios
-        .get('http://localhost:5000/apply-scholarship')
+        .get('https://a-12-server-side-gold.vercel.app/apply-scholarship')
         .then((response) => {
           setScholarships(response.data);
         })
@@ -34,11 +34,11 @@ const Adminmngscho = () => {
     // Handle form submission to update scholarship
    const handleUpdate = (event) => {
     event.preventDefault();
-    console.log('Updating scholarship:', editingScholarship);
+    // console.log('Updating scholarship:', editingScholarship);
     axios
-      .put(`http://localhost:5000/apply-scholarship/${editingScholarship._id}`, editingScholarship)
+      .put(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${editingScholarship._id}`, editingScholarship)
       .then((response) => {
-        console.log('Response:', response);
+        // console.log('Response:', response);
         if (response.data.message === 'Application updated successfully') {
           setScholarships((prev) =>
             prev.map((sch) => (sch._id === editingScholarship._id ? editingScholarship : sch))
@@ -78,7 +78,7 @@ const Adminmngscho = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/apply-scholarship/${id}`)
+            .delete(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${id}`)
             .then((response) => {
               if (response.data.message === 'Application canceled successfully') {
                 setScholarships(scholarships.filter((scholarship) => scholarship._id !== id));

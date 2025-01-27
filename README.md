@@ -1,8 +1,20 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Name
 
-Currently, two official plugins are available:
+### Scholarship Management System
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Purpose
+
+### Student can easily explore schplarships and can apply for a scholarship
+
+# Live URl
+ 
+### https://assignment-12-e037d.web.app/home
+
+# Features
+
+### Authentication, add scholarship, add reviews, moderator view, admin  view 
+
+# npm packages 
+
+### firebase, react icons, sweetalert2 etc

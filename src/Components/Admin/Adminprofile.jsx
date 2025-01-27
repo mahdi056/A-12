@@ -9,7 +9,7 @@ const Adminprofile = () => {
 
      useEffect(() => {
         // Fetch all users from your backend
-        axios.get('http://localhost:5000/users')
+        axios.get('https://a-12-server-side-gold.vercel.app/users')
           .then((res) => {
             
             const loggedInUser = res.data.find((u) => u.email === user.email);

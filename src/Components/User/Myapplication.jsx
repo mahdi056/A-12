@@ -17,7 +17,7 @@ const MyApplication = () => {
   // Fetch applied scholarships
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/apply-scholarship-by-email?email=${userEmail}`)
+      .get(`https://a-12-server-side-gold.vercel.app/apply-scholarship-by-email?email=${userEmail}`)
       .then((res) => 
         
         setAppliedScholarships(res.data)
@@ -28,7 +28,7 @@ const MyApplication = () => {
 
   // Feedback 
   useEffect(()=> {
-    axios.get('http://localhost:5000/feedback')
+    axios.get('https://a-12-server-side-gold.vercel.app/feedback')
     .then(res => setFeedback(res.data))
     .catch(error => console.error(error))
   },[]);
@@ -48,7 +48,7 @@ const MyApplication = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/apply-scholarship/${id}`)
+          .delete(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${id}`)
           .then(() => {
             setAppliedScholarships(appliedScholarships.filter((app) => app._id !== id));
             Swal.fire('Canceled!', 'Your application has been canceled.', 'success');
