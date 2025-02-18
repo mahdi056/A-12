@@ -9,7 +9,7 @@ const Header = () => {
     const { user, logout } = useContext(AuthContext);
     // console.log(user);
     return (
-        <div>
+        <div className="sticky top-0 w-4/5 mx-auto z-50">
 
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
@@ -33,32 +33,36 @@ const Header = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><NavLink to='/home'>Home</NavLink></li>
                             <li><NavLink to='/allscholarship'>All Scholarship</NavLink></li>
-
+                            <li><NavLink to='/contactus'>Contact Us</NavLink></li>
+                            <li><NavLink to='/aboutus'>About Us</NavLink></li>
                             {
                                 user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
                                     :
                                     (<li><NavLink to='/login'>Dashboard</NavLink></li>)
                             }
 
+                           
+
 
                         </ul>
                     </div>
-                    
+
                     <img className="w-16 h-12" src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li><NavLink to='/home'>Home</NavLink></li>
                         <li><NavLink to='/allscholarship'>All Scholarship</NavLink></li>
+                        <li><NavLink to='/contactus'>Contact Us</NavLink></li>
+                        <li><NavLink to='/aboutus'>About Us</NavLink></li>
                         {
-                            user ? (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
-                                :
-                                (<li><NavLink to='/login'>Dashboard</NavLink></li>)
+                            user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
+                                
                         }
 
-                        
 
-                        
+                      
+
 
                     </ul>
                 </div>
@@ -72,10 +76,10 @@ const Header = () => {
                                 </div>
 
                                 <div>
-                                <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
+                                    <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
                                 </div>
                             </div>
-                            
+
                         )
                             :
                             (<Link to='/login'> <button className="btn btn-outline btn-info">Login</button> </Link>)

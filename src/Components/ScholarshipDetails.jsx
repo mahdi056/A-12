@@ -12,7 +12,7 @@ const ScholarshipDetails = () => {
 
   // Fetch scholarship details
   useEffect(() => {
-    axios.get(`https://a-12-server-side-gold.vercel.app/all-scholarship/${id}`)
+    axios.get(`http://localhost:5000/all-scholarship/${id}`)
       .then((res) => {
         setScholarship(res.data);
       })

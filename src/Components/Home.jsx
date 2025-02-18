@@ -5,15 +5,18 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from './Authprovider/Authprovider';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
 
 const Home = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const [topScholarships, setTopScholarships] = useState([]);
 
     // Fetch scholarships & filter top ones
     useEffect(() => {
-        axios.get("https://a-12-server-side-gold.vercel.app/all-scholarship")
+        axios.get("http://localhost:5000/all-scholarship")
             .then((res) => {
                 const scholarships = res.data;
 
@@ -27,48 +30,39 @@ const Home = () => {
             });
     }, []);
 
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    };
+
 
     return (
         <div>
             {/* banner */}
 
-            <div className='flex justify-center mt-12'>
-
-                <div className="carousel w-4/5">
-                    <div id="slide1" className="carousel-item relative w-full">
-                        <img
-                            src={img1}
-                            className="w-full" />
-                        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                            <a href="#slide4" className="btn btn-circle">❮</a>
-                            <a href="#slide2" className="btn btn-circle">❯</a>
+            <div className='flex justify-center mt-20 w-full'>
+                <div className="w-4/5"> 
+                    <Slider {...settings} className="w-full">
+                        <div className="flex justify-center">
+                            <img src={img1} className="w-full max-h-[400px] object-h-cover" alt="Slide 1" />
                         </div>
-                    </div>
-                    <div id="slide2" className="carousel-item relative w-full">
-                        <img
-                            src={img2}
-                            className="w-full" />
-                        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                            <a href="#slide1" className="btn btn-circle">❮</a>
-                            <a href="#slide3" className="btn btn-circle">❯</a>
+                        <div className="flex justify-center">
+                            <img src={img2} className="w-full max-h-[400px] object-cover" alt="Slide 2" />
                         </div>
-                    </div>
-                    <div id="slide3" className="carousel-item relative w-full">
-                        <img
-                            src={img3}
-                            className="w-full" />
-                        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                            <a href="#slide2" className="btn btn-circle">❮</a>
-                            <a href="#slide1" className="btn btn-circle">❯</a>
+                        <div className="flex justify-center">
+                            <img src={img3} className="w-full max-h-[400px] object-cover" alt="Slide 3" />
                         </div>
-                    </div>
-
-
+                    </Slider>
                 </div>
             </div>
 
             {/* Top scholarship */}
-            <div className='mt-4'>
+            <div className='mt-20 w-4/5 mx-auto'>
 
                 <div className="container mx-auto p-6">
                     <h2 className="text-3xl font-bold text-center mb-6">Top Scholarships</h2>
@@ -88,17 +82,24 @@ const Home = () => {
                                     <p><span>Rating: </span>{scholarship.rating}</p>
 
                                     <div className="flex gap-4 mt-4">
-                                       
 
-                                        {
+                                        <Link to={`/scholarshipdetails/${scholarship._id}`}>
+                                            <button className="btn btn-outline btn-success">Details</button>
+                                        </Link>
+
+
+                                        {/* {
                                             user ? (<Link to={`/scholarshipdetails/${scholarship._id}`}>
                                                 <button className="btn btn-outline btn-success">Details</button>
                                             </Link>)
-                                            :
-                                            (<Link to='/login'>
-                                                <button className="btn btn-outline btn-info">Details</button>
-                                            </Link>)
-                                        }
+                                                :
+                                                (<Link to='/login'>
+                                                    <button className="btn btn-outline btn-info">Details</button>
+                                                </Link>)
+                                        } */}
+
+
+
                                     </div>
                                 </div>
                             ))
@@ -110,12 +111,12 @@ const Home = () => {
 
             </div>
 
-            <div className='flex justify-center mt-8'>
-                <Link to ='/allscholarship'><button className='btn btn-outline btn-success'>All Scholarship</button></Link>
+            <div className='flex justify-center mt-20'>
+                <Link to='/allscholarship'><button className='btn btn-outline btn-success'>All Scholarship</button></Link>
             </div>
 
             {/* First creative sectino */}
-            <div className="container mx-auto px-4 py-10">
+            <div className="container w-4/5 mx-auto mt-20">
 
                 <section className="mb-12 text-center">
                     <h2 className="text-2xl font-bold mb-4">Scholarship Benefits</h2>
@@ -139,7 +140,7 @@ const Home = () => {
                 </section>
 
                 {/* 2nd creative Section */}
-                <section className="text-center">
+                <section className="text-center mt-20">
                     <h2 className="text-2xl font-bold mb-4">Success Stories</h2>
                     <p className="text-gray-700 mb-6">
                         Hear from students who achieved their dreams with scholarships.
@@ -155,6 +156,77 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
+            </div>
+
+
+            {/* Scholarship Eligibility Criteria */}
+            <div className="container w-4/5 mx-auto mt-20">
+                <h2 className="text-2xl font-bold text-center mb-4">Scholarship Eligibility Criteria</h2>
+                <p className="text-gray-700 text-center mb-6">Check the general eligibility criteria for applying to various scholarships.</p>
+                <ul className="list-disc list-inside bg-white p-4 rounded shadow-md">
+                    <li>Academic excellence and achievements</li>
+                    <li>Financial need and background</li>
+                    <li>Extracurricular activities and leadership</li>
+                    <li>Community service and volunteer work</li>
+                </ul>
+            </div>
+
+            {/* How to Apply for Scholarships */}
+            <div className="container w-4/5 mx-auto mt-20">
+                <h2 className="text-2xl font-bold text-center mb-4">How to Apply for Scholarships</h2>
+                <p className="text-gray-700 text-center mb-6">Follow these steps to successfully apply for a scholarship.</p>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">1. Research & Find</h3>
+                        <p className="text-gray-600">Explore different scholarship opportunities based on your field of study.</p>
+                    </div>
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">2. Prepare Documents</h3>
+                        <p className="text-gray-600">Gather required documents like transcripts, recommendation letters, and essays.</p>
+                    </div>
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">3. Submit Application</h3>
+                        <p className="text-gray-600">Ensure you meet the deadline and submit an error-free application.</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Frequently Asked Questions (FAQs) */}
+            <div className="container w-4/5 mx-auto mt-20">
+                <h2 className="text-2xl font-bold text-center mb-4">Frequently Asked Questions</h2>
+                <div className="bg-white p-6 rounded shadow-md">
+                    <details className="mb-4">
+                        <summary className="font-semibold cursor-pointer">Who is eligible for scholarships?</summary>
+                        <p className="text-gray-600 mt-2">Eligibility depends on the scholarship type, but most require academic excellence or financial need.</p>
+                    </details>
+                    <details className="mb-4">
+                        <summary className="font-semibold cursor-pointer">Do I need to submit an essay?</summary>
+                        <p className="text-gray-600 mt-2">Many scholarships require a personal statement or essay highlighting your achievements.</p>
+                    </details>
+                    <details>
+                        <summary className="font-semibold cursor-pointer">How long does it take to receive results?</summary>
+                        <p className="text-gray-600 mt-2">It varies, but typically results are announced within 2-6 months of the deadline.</p>
+                    </details>
+                </div>
+            </div>
+
+            {/* Scholarship Application Tips */}
+            <div className="container w-4/5 mx-auto mt-20">
+                <h2 className="text-2xl font-bold text-center mb-4">Scholarship Application Tips</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">Start Early</h3>
+                        <p className="text-gray-600">Begin researching and preparing your application well in advance.</p>
+                    </div>
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">Write a Strong Essay</h3>
+                        <p className="text-gray-600">Highlight your strengths and experiences in a compelling way.</p>
+                    </div>
+                    <div className="p-4 bg-white shadow-md rounded">
+                        <h3 className="text-lg font-semibold">Follow Instructions</h3>
+                        <p className="text-gray-600">Carefully read the application guidelines and adhere to them strictly.</p>
+                    </div>
+                </div>
             </div>
 
         </div>

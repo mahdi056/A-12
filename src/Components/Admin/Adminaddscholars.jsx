@@ -49,7 +49,7 @@ const Adminaddscholars = () => {
         e.preventDefault();
     
         try {
-          const response = await axios.post('https://a-12-server-side-gold.vercel.app/all-scholarship', formData);
+          const response = await axios.post('http://localhost:5000/all-scholarship', formData);
           if (response.status === 201) {
             Swal.fire('Scholarship added successfully!');
             setFormData({

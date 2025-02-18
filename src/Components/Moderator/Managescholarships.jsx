@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrashAlt,FaInfoCircle, FaInfo } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaInfoCircle, FaInfo } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const ManageScholarships = () => {
   const [scholarships, setScholarships] = useState([]);
-  const [editingScholarship, setEditingScholarship] = useState(null); 
-  const [modalOpen, setModalOpen] = useState(false); 
-  const [detailsModalOpen, setDetailsModalOpen] = useState(false); 
-  const [selectedScholarship, setSelectedScholarship] = useState(null); 
+  const [editingScholarship, setEditingScholarship] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [selectedScholarship, setSelectedScholarship] = useState(null);
 
 
   useEffect(() => {
     // Fetch scholarships from the server
     axios
-      .get('https://a-12-server-side-gold.vercel.app/apply-scholarship')
+      .get('http://localhost:5000/apply-scholarship')
       .then((response) => {
         setScholarships(response.data);
       })
@@ -25,31 +25,31 @@ const ManageScholarships = () => {
 
   // Open modal and set the scholarship being edited
   const handleEdit = (scholarship) => {
-    setEditingScholarship(scholarship); 
-    setModalOpen(true); 
+    setEditingScholarship(scholarship);
+    setModalOpen(true);
   };
 
   // Handle form submission to update scholarship
- const handleUpdate = (event) => {
-  event.preventDefault();
-  // console.log('Updating scholarship:', editingScholarship);
-  axios
-    .put(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${editingScholarship._id}`, editingScholarship)
-    .then((response) => {
-      // console.log('Response:', response);
-      if (response.data.message === 'Application updated successfully') {
-        setScholarships((prev) =>
-          prev.map((sch) => (sch._id === editingScholarship._id ? editingScholarship : sch))
-        );
-        Swal.fire('Updated!', 'The scholarship has been updated.', 'success');
-      }
-    })
-    .catch((error) => {
-      console.error('Error updating scholarship:', error);
-      Swal.fire('Error!', 'Something went wrong.', 'error');
-    });
-  setModalOpen(false);
-};
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    // console.log('Updating scholarship:', editingScholarship);
+    axios
+      .put(`http://localhost:5000/apply-scholarship/${editingScholarship._id}`, editingScholarship)
+      .then((response) => {
+        // console.log('Response:', response);
+        if (response.data.message === 'Application updated successfully') {
+          setScholarships((prev) =>
+            prev.map((sch) => (sch._id === editingScholarship._id ? editingScholarship : sch))
+          );
+          Swal.fire('Updated!', 'The scholarship has been updated.', 'success');
+        }
+      })
+      .catch((error) => {
+        console.error('Error updating scholarship:', error);
+        Swal.fire('Error!', 'Something went wrong.', 'error');
+      });
+    setModalOpen(false);
+  };
 
   // Handle input changes in the edit form
   const handleInputChange = (event) => {
@@ -58,8 +58,8 @@ const ManageScholarships = () => {
   };
 
 
-   // Open details modal
-   const handleDetails = (scholarship) => {
+  // Open details modal
+  const handleDetails = (scholarship) => {
     setSelectedScholarship(scholarship); // Set the selected scholarship for details
     setDetailsModalOpen(true); // Open details modal
   };
@@ -76,7 +76,7 @@ const ManageScholarships = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${id}`)
+          .delete(`http://localhost:5000/apply-scholarship/${id}`)
           .then((response) => {
             if (response.data.message === 'Application canceled successfully') {
               setScholarships(scholarships.filter((scholarship) => scholarship._id !== id));
@@ -92,7 +92,7 @@ const ManageScholarships = () => {
   };
 
 
- 
+
 
   return (
     <div className="p-4">
@@ -119,7 +119,7 @@ const ManageScholarships = () => {
               <td className="border px-4 py-2 flex gap-2 justify-center">
 
                 <button
-                 onClick={() => handleDetails(scholarship)}
+                  onClick={() => handleDetails(scholarship)}
                 ><FaInfoCircle></FaInfoCircle></button>
                 <button
                   className="text-green-500 hover:text-green-700"
@@ -140,8 +140,8 @@ const ManageScholarships = () => {
       </table>
 
 
-        {/* Details Modal */}
-        {detailsModalOpen && selectedScholarship && (
+      {/* Details Modal */}
+      {detailsModalOpen && selectedScholarship && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-3/4">
             <h3 className="text-lg font-bold mb-4">Scholarship Details</h3>
@@ -179,7 +179,7 @@ const ManageScholarships = () => {
       )}
 
 
-     
+
       {/* Edit Modal */}
       {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

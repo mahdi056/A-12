@@ -36,6 +36,9 @@ import Adminmngappscho from './Components/Admin/Adminmngappscho';
 import Manageusers from './Components/Admin/Manageusers';
 import Managereviews from './Components/Admin/Managereviews';
 import Chart from './Components/Admin/Chart';
+import Contactus from './Components/Contactus';
+import Aboutus from './Components/Aboutus';
+import Userchart from './Components/User/Userchart';
 
 
 
@@ -75,6 +78,14 @@ const router = createBrowserRouter([
         path: '/payment',
         element: <Payment></Payment>
       },
+      {
+        path: '/contactus',
+        element: <Contactus></Contactus>
+      },
+      {
+        path: '/aboutus',
+        element: <Aboutus></Aboutus>
+      },
      
       
     ],
@@ -86,9 +97,14 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard></Dashboard>,
     children: [
+      
       {
         path: 'myprofile',
         element: <Myprofile></Myprofile>,
+      },
+      {
+        path: 'userchart',
+        element: <Userchart></Userchart>
       },
       {
         path:'myapplication',

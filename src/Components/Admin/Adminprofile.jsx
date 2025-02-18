@@ -4,55 +4,68 @@ import axios from "axios";
 
 
 const Adminprofile = () => {
-    const {user} = useContext(AuthContext);
-    const [currentUserRole, setCurrentUserRole] = useState('');
+  const { user } = useContext(AuthContext);
+  const [currentUserRole, setCurrentUserRole] = useState('');
 
-     useEffect(() => {
-        // Fetch all users from your backend
-        axios.get('https://a-12-server-side-gold.vercel.app/users')
-          .then((res) => {
-            
-            const loggedInUser = res.data.find((u) => u.email === user.email);
-            
-        
-            if (loggedInUser) {
-              setCurrentUserRole(loggedInUser.role);
-            }
-          })
-          .catch((error) => {
-            console.error('Error fetching users:', error);
-          });
-      }, [user.email]); 
+  useEffect(() => {
+    // Fetch all users from your backend
+    axios.get('http://localhost:5000/users')
+      .then((res) => {
 
-    return (
-        <div>
+        const loggedInUser = res.data.find((u) => u.email === user.email);
 
-<div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
-                <h2 className="text-2xl font-bold text-center mb-4">My Profile</h2>
 
+        if (loggedInUser) {
+          setCurrentUserRole(loggedInUser.role);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching users:', error);
+      });
+  }, [user.email]);
+
+  return (
+    <div>
+
+<div className="bg-gray-50 min-h-screen flex justify-center items-center py-8">
+            <div className="max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg">
+                <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">My Profile</h2>
+
+                {/* User Profile Information */}
                 <div className="flex flex-col items-center">
                     {/* User Image */}
                     <img
                         src={user?.photourl}
-                        alt=""
-                        className="w-24 h-24 rounded-full mb-4"
+                        alt="User Photo"
+                        className="w-32 h-32 rounded-full border-4 border-black mb-6 shadow-lg"
                     />
 
                     {/* User Name */}
-                    <h3 className="text-xl font-semibold">{user?.displayName || "Anonymous User"}</h3>
+                    <h3 className="text-2xl font-semibold text-gray-800">{user?.displayName || "Anonymous User"}</h3>
 
                     {/* User Email */}
-                    <p className="text-gray-600">{user?.email}</p>
+                    <p className="text-lg text-gray-600">{user?.email}</p>
 
-                    <p className="text-red-700 text-2xl"> {currentUserRole}</p>
+                    {/* User Address */}
+                    <div className="mt-4 w-full">
+                        <h4 className="text-lg font-medium text-gray-700">Address:</h4>
+                        <p className="text-gray-600">{user?.address || "Not provided"}</p>
+                    </div>
 
+                    {/* User Phone */}
+                    <div className="mt-4 w-full">
+                        <h4 className="text-lg font-medium text-gray-700">Phone:</h4>
+                        <p className="text-gray-600">{user?.phone || "Not provided"}</p>
+                    </div>
 
+                   
                 </div>
             </div>
-
-            
         </div>
-    );
+
+
+    </div>
+  );
 };
 
 export default Adminprofile;

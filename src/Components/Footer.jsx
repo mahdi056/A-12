@@ -1,17 +1,16 @@
-import React from "react";
+import logo from '../assets/s logo.png'
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white py-8">
+        <footer className="bg-gray-900 text-white py-8 mt-20">
             <div className="container mx-auto px-4">
                 <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
 
                     
                     <div>
-                        <h2 className="text-xl font-semibold text-blue-400">About Us</h2>
-                        <p className="text-gray-400 mt-2">
-                            We help students find and apply for scholarships easily, ensuring a brighter future.
-                        </p>
+                        <img className='w-20 mx-auto' src={logo} alt="" />
+                        <h2 className="text-xl font-semibold mt-2 text-center">Scholarship Management System</h2>
+                        
                     </div>
 
                    

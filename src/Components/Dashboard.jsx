@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
     // Fetch all users from your backend
     axios
-      .get('https://a-12-server-side-gold.vercel.app/users')
+      .get('http://localhost:5000/users')
       .then((res) => {
         
         const loggedInUser = res.data.find((u) => u.email === user.email);
@@ -28,7 +28,7 @@ const Dashboard = () => {
   
 
  
-// console.log(currentUserRole);
+
  
 
  
@@ -45,12 +45,7 @@ const Dashboard = () => {
           user && currentUserRole !== 'moderator' && currentUserRole !== 'admin' && (
             <>
 
-              <NavLink
-                to="/home"
-                className="mb-4 px-4 py-2 rounded-lg hover:bg-black transition-all w-full text-left"
-              >
-                Home
-              </NavLink>
+             
               <NavLink
                 to="/dashboard/myprofile"
                 className={({ isActive }) =>
@@ -60,6 +55,19 @@ const Dashboard = () => {
               >
                 My Profile
               </NavLink>
+
+              
+              <NavLink
+                to="/dashboard/userchart"
+                className={({ isActive }) =>
+                  `mb-4 px-4 py-2 rounded-lg hover:bg-black transition-all w-full text-left ${isActive ? "bg-black font-bold" : ""
+                  }`
+                }
+              >
+                Stats
+              </NavLink>
+
+           
               <NavLink
                 to="/dashboard/myapplication"
                 className={({ isActive }) =>
@@ -77,6 +85,13 @@ const Dashboard = () => {
                 }
               >
                 My Reviews
+              </NavLink>
+
+              <NavLink
+                to="/home"
+                className="mb-4 px-4 py-2 rounded-lg hover:bg-black transition-all w-full text-left"
+              >
+                Home
               </NavLink>
 
 
@@ -238,7 +253,9 @@ const Dashboard = () => {
 
       {/* Main Content Area */}
       <div className="w-4/5 bg-gray-100 p-6 overflow-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard Content</h1>
+      
+
+        <h1 className='text-center font-bold mt-24 text-5xl'>Welcome {user.displayName}</h1>
         <div className="bg-white rounded-lg shadow p-6">
           <Outlet />
         </div>

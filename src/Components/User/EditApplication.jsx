@@ -17,7 +17,7 @@ const EditApplication = () => {
 
     // Fetch application data
     useEffect(() => {
-        axios.get(`https://a-12-server-side-gold.vercel.app/apply-scholarship-by-email/${id}`)
+        axios.get(`http://localhost:5000/apply-scholarship-by-email/${id}`)
             .then((res) => setFormData(res.data))
             .catch((err) => console.error(err));
     }, [id]);
@@ -45,7 +45,7 @@ const EditApplication = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${id}`, formData)
+        axios.put(`http://localhost:5000/apply-scholarship/${id}`, formData)
             .then(() => {
                 Swal.fire('Success', 'Application updated successfully.', 'success');
                 navigate('/dashboard/myapplication');

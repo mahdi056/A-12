@@ -21,7 +21,7 @@ const EditReviewModal = ({ review, onClose, onReviewUpdated }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`https://a-12-server-side-gold.vercel.app/reviews/${review._id}`, formData)
+      .put(`http://localhost:5000/reviews/${review._id}`, formData)
       .then(() => {
         Swal.fire('Success', 'Review updated successfully!', 'success');
         onReviewUpdated(); // Notify parent to refresh reviews
