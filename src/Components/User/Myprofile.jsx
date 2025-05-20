@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../Authprovider/Authprovider";
 import axios from "axios";
-
+import { FaRegUser } from "react-icons/fa";
 const MyProfile = () => {
     const { user } = useContext(AuthContext);
 
@@ -17,11 +17,15 @@ const MyProfile = () => {
                 {/* User Profile Information */}
                 <div className="flex flex-col items-center">
                     {/* User Image */}
-                    <img
+                   {
+                    user ? ( <img
                         src={user?.photourl}
                         alt="User Photo"
                         className="w-32 h-32 rounded-full border-4 border-black mb-6 shadow-lg"
-                    />
+                    />)
+                    :
+                    (<FaRegUser className="w-32 h-32 rounded-full border-4 border-black mb-6 shadow-lg"></FaRegUser>)
+                   }
 
                     {/* User Name */}
                     <h3 className="text-2xl font-semibold text-gray-800">{user?.displayName || "Anonymous User"}</h3>

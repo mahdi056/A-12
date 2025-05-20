@@ -15,7 +15,7 @@ const MyReviews = () => {
   useEffect(() => {
     if (userEmail) {
       axios
-        .get(`http://localhost:5000/reviews-by-email?email=${userEmail}`)
+        .get(`https://a-12-server-side-gold.vercel.app/reviews-by-email?email=${userEmail}`)
         .then((res) => setReviews(res.data))
         .catch((err) => console.error(err));
     }
@@ -32,7 +32,7 @@ const MyReviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/reviews/${reviewId}`)
+          .delete(`https://a-12-server-side-gold.vercel.app/reviews/${reviewId}`)
           .then(() => {
             setReviews(reviews.filter((review) => review._id !== reviewId));
             Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
@@ -59,7 +59,7 @@ const MyReviews = () => {
   // Handle review update
   const handleReviewUpdated = () => {
     axios
-      .get(`http://localhost:5000/reviews?email=${userEmail}`)
+      .get(`https://a-12-server-side-gold.vercel.app/reviews?email=${userEmail}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error(err));
   };

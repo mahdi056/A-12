@@ -39,7 +39,7 @@ const AddReviewModal = ({ isOpen, onClose, application, onReviewAdded }) => {
     
 
     axios
-      .post('http://localhost:5000/reviews', reviewData)
+      .post('https://a-12-server-side-gold.vercel.app/reviews', reviewData)
       .then(() => {
         Swal.fire('Success', 'Review added successfully!', 'success');
         onReviewAdded();

@@ -62,7 +62,7 @@ const Registration = () => {
 
    
       const userInfo = { name, email, photo: photourl };
-      const res = await axios.post("http://localhost:5000/users", userInfo);
+      const res = await axios.post("https://a-12-server-side-gold.vercel.app/users", userInfo);
       if (res.data.insertedId) {
         toast.success("Registration Successful!", {
           position: "top-center",

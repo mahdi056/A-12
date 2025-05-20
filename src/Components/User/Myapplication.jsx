@@ -17,7 +17,7 @@ const MyApplication = () => {
   // Fetch applied scholarships
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/apply-scholarship-by-email?email=${userEmail}`)
+      .get(`https://a-12-server-side-gold.vercel.app/apply-scholarship-by-email?email=${userEmail}`)
       .then((res) => 
         
         setAppliedScholarships(res.data)
@@ -28,7 +28,7 @@ const MyApplication = () => {
 
   // Feedback 
   useEffect(()=> {
-    axios.get('http://localhost:5000/feedback')
+    axios.get('https://a-12-server-side-gold.vercel.app/feedback')
     .then(res => setFeedback(res.data))
     .catch(error => console.error(error))
   },[]);
@@ -48,7 +48,7 @@ const MyApplication = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/apply-scholarship/${id}`)
+          .delete(`https://a-12-server-side-gold.vercel.app/apply-scholarship/${id}`)
           .then(() => {
             setAppliedScholarships(appliedScholarships.filter((app) => app._id !== id));
             Swal.fire('Canceled!', 'Your application has been canceled.', 'success');
@@ -170,7 +170,7 @@ const MyApplication = () => {
           <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-lg">
             <h2 className="text-2xl font-bold mb-4">Application Details</h2>
             <p><strong>Phone:</strong> {selectedApplication.phone}</p>
-            <p><strong>Photo:</strong> <img src={selectedApplication.photo} alt="" className="w-20 h-20 rounded-full" /></p>
+           
             <p><strong>Address:</strong> {selectedApplication.address.village}, {selectedApplication.address.district}, {selectedApplication.address.country}</p>
             <p><strong>Gender:</strong> {selectedApplication.gender}</p>
             <p><strong>Degree:</strong> {selectedApplication.degree}</p>

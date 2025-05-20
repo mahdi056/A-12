@@ -8,11 +8,11 @@ const ScholarshipDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
-  const [reviews,setReviews] = useState([]);
+  
 
   // Fetch scholarship details
   useEffect(() => {
-    axios.get(`http://localhost:5000/all-scholarship/${id}`)
+    axios.get(`https://a-12-server-side-gold.vercel.app/all-scholarship/${id}`)
       .then((res) => {
         setScholarship(res.data);
       })

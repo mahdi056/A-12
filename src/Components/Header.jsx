@@ -9,7 +9,7 @@ const Header = () => {
     const { user, logout } = useContext(AuthContext);
     // console.log(user);
     return (
-        <div className="sticky top-0 w-4/5 mx-auto z-50">
+        <div className="sticky top-0 mx-auto z-50">
 
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
@@ -41,7 +41,7 @@ const Header = () => {
                                     (<li><NavLink to='/login'>Dashboard</NavLink></li>)
                             }
 
-                           
+
 
 
                         </ul>
@@ -57,11 +57,11 @@ const Header = () => {
                         <li><NavLink to='/aboutus'>About Us</NavLink></li>
                         {
                             user && (<li><NavLink to='/dashboard'>Dashboard</NavLink></li>)
-                                
+
                         }
 
 
-                      
+
 
 
                     </ul>
@@ -69,16 +69,12 @@ const Header = () => {
                 <div className="navbar-end">
                     {
                         user ? (
-                            <div className="flex gap-x-2">
-                                <div>
-                                    <img className="rounded-full w-12 border-2 border-black" src={user.photourl} alt="" />
-                                    <p>{user.displayName}</p>
-                                </div>
+                           
 
                                 <div>
-                                    <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-info">Logout</button> </Link>
+                                    <Link to='/home'> <button onClick={logout} className="btn btn-outline btn-error">Logout</button> </Link>
                                 </div>
-                            </div>
+                            
 
                         )
                             :

@@ -17,13 +17,13 @@ const UserChart = () => {
         if (userEmail) {
             // Fetch applied scholarships
             axios
-                .get(`http://localhost:5000/apply-scholarship-by-email?email=${userEmail}`)
+                .get(`https://a-12-server-side-gold.vercel.app/apply-scholarship-by-email?email=${userEmail}`)
                 .then((res) => setAppliedScholarships(res.data))
                 .catch((err) => console.error(err));
 
             // Fetch reviews
             axios
-                .get(`http://localhost:5000/reviews-by-email?email=${userEmail}`)
+                .get(`https://a-12-server-side-gold.vercel.app/reviews-by-email?email=${userEmail}`)
                 .then((res) => setReviews(res.data))
                 .catch((err) => console.error(err));
         }

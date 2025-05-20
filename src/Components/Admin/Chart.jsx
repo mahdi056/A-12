@@ -28,8 +28,8 @@ const Chart = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const userResponse = await axios.get('http://localhost:5000/users'); 
-        const appliedResponse = await axios.get('http://localhost:5000/apply-scholarship'); 
+        const userResponse = await axios.get('https://a-12-server-side-gold.vercel.app/users'); 
+        const appliedResponse = await axios.get('https://a-12-server-side-gold.vercel.app/apply-scholarship'); 
 
         const userCount = userResponse.data.length;
         const appliedCount = appliedResponse.data.length;

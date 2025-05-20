@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Authprovider/Authprovider";
 import axios from "axios";
-
+import { FaRegUser } from "react-icons/fa";
 
 const Adminprofile = () => {
   const { user } = useContext(AuthContext);
@@ -9,7 +9,7 @@ const Adminprofile = () => {
 
   useEffect(() => {
     // Fetch all users from your backend
-    axios.get('http://localhost:5000/users')
+    axios.get('https://a-12-server-side-gold.vercel.app/users')
       .then((res) => {
 
         const loggedInUser = res.data.find((u) => u.email === user.email);
@@ -34,11 +34,15 @@ const Adminprofile = () => {
                 {/* User Profile Information */}
                 <div className="flex flex-col items-center">
                     {/* User Image */}
-                    <img
+                     {
+                    user ? ( <img
                         src={user?.photourl}
                         alt="User Photo"
                         className="w-32 h-32 rounded-full border-4 border-black mb-6 shadow-lg"
-                    />
+                    />)
+                    :
+                    (<FaRegUser className="w-32 h-32 rounded-full border-4 border-black mb-6 shadow-lg"></FaRegUser>)
+                   }
 
                     {/* User Name */}
                     <h3 className="text-2xl font-semibold text-gray-800">{user?.displayName || "Anonymous User"}</h3>

@@ -6,6 +6,9 @@ import axios from "axios"; // Import Axios for API calls
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
+
+
+
 const Authprovider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -55,7 +58,7 @@ const Authprovider = ({ children }) => {
     
                 try {
                    
-                    const response = await axios.post("http://localhost:5000/jwt", { email: currentUser.email });
+                    const response = await axios.post("https://a-12-server-side-gold.vercel.app/jwt", { email: currentUser.email });
                     const token = response.data.token;
     
                     if (token) {

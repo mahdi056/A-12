@@ -34,7 +34,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
 
     useEffect(() => {
         axios
-          .post("http://localhost:5000/create-payment-intent", { price })
+          .post("https://a-12-server-side-gold.vercel.app/create-payment-intent", { price })
           .then((res) => setClientSecret(res.data.clientSecret))
           .catch((err) => console.error(err));
       }, [price]);
@@ -126,7 +126,7 @@ const Checkoutform = ({price,universityName,scholarshipCategory,subCategory,appF
         
     
         axios
-          .post("http://localhost:5000/apply-scholarship", applicationData)
+          .post("https://a-12-server-side-gold.vercel.app/apply-scholarship", applicationData)
           .then(() => toast.success("Application submitted successfully!"))
           .catch((err) => toast.error("Application submission failed."));
       };

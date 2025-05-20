@@ -10,7 +10,7 @@ const Allreviews = () => {
   // Fetch all reviews
   useEffect(() => {
     axios
-      .get("http://localhost:5000/reviews") 
+      .get("https://a-12-server-side-gold.vercel.app/reviews") 
       .then((response) => {
         setReviews(response.data);
       })
@@ -31,7 +31,7 @@ const Allreviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/reviews/${id}`)
+          .delete(`https://a-12-server-side-gold.vercel.app/reviews/${id}`)
           .then(() => {
             setReviews(reviews.filter((review) => review._id !== id));
             Swal.fire("Deleted!", "The review has been deleted.", "success");

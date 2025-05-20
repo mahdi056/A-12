@@ -1,6 +1,6 @@
-import img1 from '../assets/img1.avif';
-import img2 from '../assets/img2.jpeg';
-import img3 from '../assets/img3.jpeg';
+import img1 from '../assets/img1.jpg';
+import img2 from '../assets/img2.jpg';
+import img3 from '../assets/img3.jpg';
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -16,7 +16,7 @@ const Home = () => {
 
     // Fetch scholarships & filter top ones
     useEffect(() => {
-        axios.get("http://localhost:5000/all-scholarship")
+        axios.get("https://a-12-server-side-gold.vercel.app/all-scholarship")
             .then((res) => {
                 const scholarships = res.data;
 
@@ -44,18 +44,19 @@ const Home = () => {
     return (
         <div>
             {/* banner */}
+            
 
             <div className='flex justify-center mt-20 w-full'>
                 <div className="w-4/5"> 
                     <Slider {...settings} className="w-full">
                         <div className="flex justify-center">
-                            <img src={img1} className="w-full max-h-[400px] object-h-cover" alt="Slide 1" />
+                            <img src={img1} className="w-full max-h-[400px] object-h-contain" alt="Slide 1" />
                         </div>
                         <div className="flex justify-center">
                             <img src={img2} className="w-full max-h-[400px] object-cover" alt="Slide 2" />
                         </div>
                         <div className="flex justify-center">
-                            <img src={img3} className="w-full max-h-[400px] object-cover" alt="Slide 3" />
+                            <img src={img3} className="w-full max-h-[400px] object-contain" alt="Slide 3" />
                         </div>
                     </Slider>
                 </div>
@@ -70,7 +71,7 @@ const Home = () => {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {topScholarships.length > 0 ? (
                             topScholarships.map((scholarship) => (
-                                <div key={scholarship._id} className="bg-white shadow-lg rounded-lg p-4">
+                                <div key={scholarship._id} className="bg-white shadow-lg rounded-lg p-4 flex flex-col justify-between">
                                     <img src={scholarship.university_logo} alt="University Logo" className="w-full h-32 object-contain mb-4" />
                                     <h3 className="text-xl font-semibold">{scholarship.university_name}</h3>
                                     <p className="text-gray-600">{scholarship.university_location.city}, {scholarship.university_location.country}</p>
@@ -81,22 +82,11 @@ const Home = () => {
                                     <p className="text-blue-500 font-bold"> Application Fee: ${scholarship.application_fees}</p>
                                     <p><span>Rating: </span>{scholarship.rating}</p>
 
-                                    <div className="flex gap-4 mt-4">
+                                    <div className="flex gap-4 pt-4">
 
                                         <Link to={`/scholarshipdetails/${scholarship._id}`}>
-                                            <button className="btn btn-outline btn-success">Details</button>
+                                            <button className="btn btn-outline btn-success">Details</button >
                                         </Link>
-
-
-                                        {/* {
-                                            user ? (<Link to={`/scholarshipdetails/${scholarship._id}`}>
-                                                <button className="btn btn-outline btn-success">Details</button>
-                                            </Link>)
-                                                :
-                                                (<Link to='/login'>
-                                                    <button className="btn btn-outline btn-info">Details</button>
-                                                </Link>)
-                                        } */}
 
 
 
